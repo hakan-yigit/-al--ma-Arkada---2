@@ -8,6 +8,10 @@ export default function app() {
     answer: 'JavaScript kütüphanesi.',
     explanation: `Birinin framework diyebilme cüretini gösterdiğini duyarsanız, onu mümkün olduğunca bilgili bir şekilde düzeltmeniz, tercihen yanıtınıza " aslında..." diye başlamanız önemlidir.`,
   })
+  const [flipped,setFlipped] = useState(false);
+  const handleClick = () =>{
+    setFlipped((pre)=>!pre)
+  }
 
   /* Challenge: 
 
@@ -29,19 +33,19 @@ export default function app() {
 
       {/*-------Aşağıdaki div'i düzenleyin------------*/}
 
-      <div className='flash-card'>
+      <div className={flipped ? "flash-card flipped" :'flash-card'}>
         {/*-------Yukarıdaki div'i düzenleyin------------*/}
 
         <div className='flash-card-inner'>
           <div className='flash-card-front'>
             <p className='question'>{flashCard.question}</p>
-            <ol type='a'>
+            <ol type='a' onClick={handleClick}>
               {flashCard.choices.map((choice) => (
                 <li key={crypto.randomUUID()}>{choice}</li>
               ))}
             </ol>
           </div>
-          <div className='flash-card-back'>
+          <div className='flash-card-back' onClick={handleClick}>
             <p className='answer'>{flashCard.answer}</p>
             <p>{flashCard.explanation}</p>
           </div>
